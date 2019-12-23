@@ -2,14 +2,9 @@
 pipeline {
     agent any
     stages {
-        stage("Build Maven") {
-            steps {
-                sh 'mvn -B clean package'
-            }
-        }
         stage("Run Gatling") {
             steps {
-                sh 'mvn gatling:test'
+                sh 'mvn clean gatling:test -Dgatling.simulationClass=com.research.RecordedSimulation'
             }
             post {
                 always {
